@@ -22,7 +22,7 @@
 #if !defined(_MSC_VER) || !defined(_KERNEL_MODE)
 #include <stdint.h>
 #endif
-#include "include/platform.h"
+#include "include/capstone/platform.h"
 
 /// An unsigned integer type large enough to represent all physical registers,
 /// but not necessarily virtual registers.

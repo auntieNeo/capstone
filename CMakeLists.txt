@@ -53,27 +53,27 @@ set(SOURCES_ENGINE
     )
 
 set(HEADERS_ENGINE
-    include/capstone.h
+    include/capstone/capstone.h
     utils.h
     MCRegisterInfo.h
     MCInst.h
     MCInstrDesc.h
     SStream.h
     cs_priv.h
-    include/platform.h
+    include/capstone/platform.h
     )
 
 set(HEADERS_COMMON
-    include/arm64.h
-    include/arm.h
-    include/capstone.h
-    include/mips.h
-    include/ppc.h
-    include/x86.h
-    include/sparc.h
-    include/systemz.h
-    include/xcore.h
-    include/platform.h
+    include/capstone/arm64.h
+    include/capstone/arm.h
+    include/capstone/capstone.h
+    include/capstone/mips.h
+    include/capstone/ppc.h
+    include/capstone/x86.h
+    include/capstone/sparc.h
+    include/capstone/systemz.h
+    include/capstone/xcore.h
+    include/capstone/platform.h
     )
 
 
@@ -296,7 +296,7 @@ set(ALL_HEADERS
     ${HEADERS_XCORE}
     )
 
-include_directories("${PROJECT_SOURCE_DIR}/include")
+include_directories("${PROJECT_SOURCE_DIR}/include/capstone")
 
 ## properties
 # version info
@@ -308,6 +308,8 @@ if (CAPSTONE_BUILD_STATIC)
     add_library(capstone-static STATIC ${ALL_SOURCES} ${ALL_HEADERS})
     set_property(TARGET capstone-static PROPERTY OUTPUT_NAME capstone)
     set(default-target capstone-static)
+    target_include_directories(capstone-static SYSTEM
+        INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 endif ()
 
 # Force static runtime libraries
@@ -326,6 +328,8 @@ if (CAPSTONE_BUILD_SHARED)
     add_library(capstone-shared SHARED ${ALL_SOURCES} ${ALL_HEADERS})
     set_property(TARGET capstone-shared PROPERTY OUTPUT_NAME capstone)
     set_property(TARGET capstone-shared PROPERTY COMPILE_FLAGS -DCAPSTONE_SHARED)
+    target_include_directories(capstone-shared SYSTEM
+        INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
     if (MSVC)
         set_target_properties(capstone-shared PROPERTIES IMPORT_SUFFIX _dll.lib)

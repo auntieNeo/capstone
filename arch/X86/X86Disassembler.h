@@ -81,7 +81,7 @@
 #include <stdint.h>
 #endif
 
-#include "../../include/capstone.h"
+#include "../../include/capstone/capstone.h"
 
 #include "../../MCInst.h"
 

@@ -22,7 +22,7 @@
 #if !defined(_MSC_VER) || !defined(_KERNEL_MODE)
 #include <stdint.h>
 #endif
-#include "include/capstone.h"
+#include "include/capstone/capstone.h"
 
 typedef struct MCInst MCInst;
 typedef struct cs_struct cs_struct;
